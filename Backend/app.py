@@ -16,14 +16,14 @@ def home():
     return "Backend is running successfully 🚀"
 
 
-app.config['JWT_SECRET_KEY'] = 'your-secret-key-change-this-in-production'
+app.config['JWT_SECRET_KEY'] = os.environ.get("JWT_SECRET_KEY", "dev-secret")
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=24)
 
 jwt = JWTManager(app)
 CORS(app)
 
 # MongoDB connection
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient(os.environ.get("MONGODB_URI"))
 db = client['parking_system']
 
 # Collections
@@ -524,7 +524,8 @@ def export_bookings():
 def health_check():
     return jsonify({'status': 'OK', 'message': 'Parking System API is running'}), 200
 
+
+initialize_data()
 if __name__ == '__main__':
-    initialize_data()
     app.run(debug=True, host='0.0.0.0', port=5000)
 
