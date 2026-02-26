@@ -8,11 +8,14 @@ from pymongo import MongoClient
 from bson import ObjectId
 import json
 
+
+app = Flask(__name__)
+
 @app.route("/")
 def home():
     return "Backend is running successfully 🚀"
 
-app = Flask(__name__)
+
 app.config['JWT_SECRET_KEY'] = 'your-secret-key-change-this-in-production'
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=24)
 
