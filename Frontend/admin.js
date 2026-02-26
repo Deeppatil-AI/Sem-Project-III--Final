@@ -303,8 +303,8 @@ function filterBookings() {
     
     if (searchInput) {
         filteredBookings = filteredBookings.filter(booking => 
-            booking.name.toLowerCase().includes(searchInput) ||
-            booking.vehicle.toLowerCase().includes(searchInput) ||
+            booking.customer_name.toLowerCase().includes(searchInput) ||
+            booking.vehicle_number.toLowerCase().includes(searchInput) ||
             booking.slot.toLowerCase().includes(searchInput)
         );
     }
